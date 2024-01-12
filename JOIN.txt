@@ -1,0 +1,60 @@
+  1.  SELECT degrees.name, students.name, students.surname
+      FROM students
+      JOIN degrees
+      ON students.degree_id = degrees.id
+      WHERE `degrees`.`name` = `Corso di Laurea in Economia`
+
+  2.  SELECT courses.name, courses.description, courses.year
+      FROM courses
+      JOIN degrees
+      ON courses.degree_id = degrees.id
+      WHERE courses.year = "5";
+
+  3.  SELECT *
+      FROM courses
+      JOIN course_teacher
+      ON courses.id = course_teacher.course_id
+      JOIN teachers
+      ON teachers.id = course_teacher.teacher_id
+      WHERE teachers.id = "44";
+
+  4.  SELECT students.name, students.surname, degrees.name, departments.name
+      FROM students
+      JOIN degrees
+      ON students.degree_id = degrees.id
+      JOIN departments
+      ON degrees.department_id = departments.id
+      ORDER BY students.name, students.surname;
+
+  5.  SELECT courses.name, departments.name, teachers.name, teachers.surname
+      FROM course_teacher
+      JOIN teachers
+      ON course_teacher.teacher_id = teachers.id
+      JOIN courses
+      ON course_teacher.course_id = courses.id
+      JOIN degrees
+      ON courses.degree_id = degrees.id
+      JOIN departments
+      ON degrees.department_id = departments.id
+
+  6.  SELECT teachers.name, teachers.surname, courses.name, departments.name
+      FROM teachers
+      JOIN course_teacher
+      ON course_teacher.teacher_id = teachers.id
+      JOIN courses
+      ON course_teacher.course_id = courses.id
+      JOIN degrees
+      ON courses.degree_id = degrees.id
+      JOIN departments
+      ON degrees.department_id = departments.id
+      WHERE departments.name = "Dipartimento di Matematica";
+
+  7.  SELECT DISTINCT students.name, students.surname, exam_student.vote, MAX(exam_student.vote) AS massimo
+      FROM students
+      JOIN exam_student
+      ON exam_student.student_id = students.id
+      JOIN exams 
+      ON exam_student.exam_id = exams.id
+      WHERE exam_student.vote >= 18  
+      ORDER BY `exam_student`.`vote` ASC
+          (Da completare)
